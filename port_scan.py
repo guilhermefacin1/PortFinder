@@ -17,8 +17,12 @@ def port_scan(host):
     for port in range(1, 5000):
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client.settimeout(0.05)
-        if client.connect_ex((host,port)) == 0:
-            print(f" {port}     open")
+        try:
+            if client.connect_ex((host,port)) == 0:
+                print(f" {port}     open")
+        except KeyboardInterrupt:
+            print("Programa finalizado!")
+            sys.exit(0)
     return 0
 
 def main():
@@ -29,5 +33,5 @@ def main():
         print(f"Usage:\n$ ./portfinder example.com")
         sys.exit(0)
 
-main()
-
+if __name__ == "__main__":
+    main()
