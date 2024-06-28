@@ -13,25 +13,35 @@ def banner():
         
 
 def port_scan(host):
-    print(f" PORT   STATE")
-    for port in range(1, 5000):
+    print(f" PORT   STATE   SERVICE")
+    for port in range(1, 65536):
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client.settimeout(0.05)
+        client.settimeout(0.1)
         try:
-            if client.connect_ex((host,port)) == 0:
-                print(f" {port}     open")
+            result = client.connect_ex((host,port))
+            if result == 0:
+                service = socket.getservbyport(port)
+                print(f" {port}     open    {service}")
+            client.close()
         except KeyboardInterrupt:
             print("Programa finalizado!")
+            sys.exit(0)
+        except socket.gaierror:
+            print("Hostname não pode ser resolvido.")
+            sys.exit(0)
+        except socket.error:
+            print("Não foi possível conectar ao servidor.")
             sys.exit(0)
     return 0
 
 def main():
+    if len(sys.argv) != 2:
+        print(f"Usage:\n$ ./portfinder.py example.com")
+        sys.exit(1)
+                                
+    host = sys.argv[1]
     banner()
-    try:
-        port_scan(sys.argv[1])    
-    except IndexError:
-        print(f"Usage:\n$ ./portfinder example.com")
-        sys.exit(0)
+    port_scan(host)
 
 if __name__ == "__main__":
     main()
