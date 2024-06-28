@@ -3,18 +3,21 @@
 PortFinder é um script Python simples para realizar um scan de portas TCP em um determinado host.
 Pré-requisitos
 
-    Python 3.x instalado no seu sistema.
+Python 3.x instalado no seu sistema.
 
 ## Como usar
 
-    Clone este repositório ou baixe o arquivo portfinder.py.
-    Abra o terminal e navegue até o diretório onde o arquivo portfinder.py está localizado.
-    Execute o script Python com o comando:
+Clone este repositório ou baixe o arquivo portfinder.py.
+```shell
+$ git clone https://github.com/7acini/PortFinder
+```
+Abra o terminal e navegue até o diretório onde o arquivo portfinder.py está localizado.
+Execute o script Python com o comando:
 
-```bash
+```shell
 $ ./portfinder example.com
 ```
-Substitua example.com pelo host que deseja fazer o scan de portas.
+Substitua "example.com" pelo host que deseja fazer o scan de portas.
 Exemplo de Saída
 
 Após a execução bem-sucedida do script, você verá a lista de portas abertas no host especificado, conforme mostrado abaixo:
